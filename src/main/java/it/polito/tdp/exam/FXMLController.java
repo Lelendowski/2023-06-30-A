@@ -5,9 +5,11 @@
 package it.polito.tdp.exam;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.exam.model.Model;
+import it.polito.tdp.exam.model.Team;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -38,7 +40,7 @@ public class FXMLController {
     private ComboBox<?> cmbAnno; // Value injected by FXMLLoader
 
     @FXML // fx:id="cmbSquadra"
-    private ComboBox<?> cmbSquadra; // Value injected by FXMLLoader
+    private ComboBox<String> cmbSquadra; // Value injected by FXMLLoader
 
     @FXML // fx:id="txtResult"
     private TextArea txtResult; // Value injected by FXMLLoader
@@ -75,6 +77,8 @@ public class FXMLController {
 
     public void setModel(Model model) {
         this.model = model;
+        ArrayList<String> listaSquadre = new ArrayList<>(model.getNomiTeam());
+        cmbSquadra.getItems().addAll(listaSquadre);
     }
 
 }
