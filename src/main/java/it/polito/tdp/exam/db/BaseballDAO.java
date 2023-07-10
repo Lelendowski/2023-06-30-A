@@ -13,6 +13,30 @@ import it.polito.tdp.exam.model.Team;
 
 public class BaseballDAO {
 
+	public ArrayList<String> getNomiSquadre() {
+		String sql = "SELECT distinct name "
+				+ "FROM teams";
+		ArrayList<String> result = new ArrayList<>();
+
+		try {
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+				result.add(rs.getString("name"));
+			}
+
+			conn.close();
+			return result;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Errore connessione al database");
+			throw new RuntimeException("Error Connection Database");
+		}
+	}
+	
 	public List<People> readAllPlayers() {
 		String sql = "SELECT * " + "FROM people";
 		List<People> result = new ArrayList<People>();
